@@ -1,0 +1,22 @@
+package org.estore.estore.service;
+
+import org.estore.estore.dto.request.AddProductRequest;
+import org.estore.estore.dto.response.AddProductResponse;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+
+public class ProductServiceTest {
+
+    @Autowired
+    private ProductService productService;
+
+    @Test
+    public void testCanAddProduct() {
+        AddProductRequest productRequest = new AddProductRequest();
+
+        AddProductResponse productResponse = productService.add(productRequest);
+        assertThat(productResponse).isNotNull();
+    }
+}
