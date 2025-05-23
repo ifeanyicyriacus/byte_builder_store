@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper       modelMapper;
 
     @Override
     public Product getProductBy(String id) {
         return productRepository.findById(id)
-                .orElseThrow(()->new ProductNotFoundException("product not found"));
+                .orElseThrow(() -> new ProductNotFoundException("product not found"));
     }
 
     @Override
