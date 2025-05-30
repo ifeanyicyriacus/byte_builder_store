@@ -9,8 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static util.TestUtils.buildCreateOrder;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,13 +22,13 @@ public class OrderControllerTest {
 
     @Test
     @Sql(scripts ={"/db/script.sql"})
-    public void testPlaceOrder() {
+    public void testPlaceOrder()  throws Exception{
         ObjectMapper mapper = new ObjectMapper();
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/api/v1/order")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsBytes(buildCreateOrder())))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
+                        .post("/api/v1/order")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsBytes(buildCreateOrder())))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
     }
 }

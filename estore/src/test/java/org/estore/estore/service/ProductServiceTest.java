@@ -4,9 +4,11 @@ import org.estore.estore.dto.request.AddProductRequest;
 import org.estore.estore.dto.response.AddProductResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@SpringBootTest
 public class ProductServiceTest {
 
     @Autowired

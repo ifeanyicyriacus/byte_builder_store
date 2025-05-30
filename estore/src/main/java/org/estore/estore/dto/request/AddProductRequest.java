@@ -10,12 +10,12 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 public class AddProductRequest {
 
-    private String name;
+    private String              name;
     private BigDecimal          price;
     private long                quantity;
+    private String              description;
     private List<MultipartFile> media;
-    private String description;
 }
