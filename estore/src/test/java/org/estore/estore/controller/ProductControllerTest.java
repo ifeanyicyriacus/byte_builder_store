@@ -28,7 +28,7 @@ public class ProductControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testCanAddProduct() throws Exception{
+    public void testCanAddProduct() throws Exception {
         String imagePath = "/home/civm/Documents/Dynamite/sandbox/byte_builder_store/estore/src/test/resources/assets/iPhoneImage.jpg";
         String videoPath = "/home/civm/Documents/Dynamite/sandbox/byte_builder_store/estore/src/test/resources/assets/iPhoneVideo.mp4";
 
@@ -36,12 +36,17 @@ public class ProductControllerTest {
         Path video = Paths.get(videoPath);
 
         mockMvc.perform(multipart("/api/v1/product")
-                .file("media", new MockMultipartFile("image", Files.newInputStream(image)).getBytes())
-                .file("media", new MockMultipartFile("video", Files.newInputStream(video)).getBytes())
-                .params(buildFormFields())
-                .with(request -> {request.setMethod(HttpMethod.PUT.name());
-                return request;
-                }).contentType(MediaType.MULTIPART_FORM_DATA)
+                        .file("media", new MockMultipartFile("image", Files.newInputStream(image)).getBytes())
+                        .file("media", new MockMultipartFile("video", Files.newInputStream(video)).getBytes())
+                        .params(buildFormFields())
+                        .with(request -> {
+                            request.setMethod(HttpMethod.PUT.name());
+                            return request;
+                        }).contentType(MediaType.MULTIPART_FORM_DATA)
+                        .with(r -> {
+                            r.setMethod(HttpMethod.PUT.toString());
+                            return r;
+                        })
                 ).andExpect(status().is2xxSuccessful())
                 .andDo(print());
     }

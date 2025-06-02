@@ -1,4 +1,4 @@
-package org.estore.estore.dto.response;
+package org.estore.estore.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,9 +8,11 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class AddProductResponse {
+public class UpdateProductRequest {
     private String      name;
     private String      description;
     private BigDecimal  price;
     private Set<String> media;
+    private String      category;
+    private Long        quantity;
 }
