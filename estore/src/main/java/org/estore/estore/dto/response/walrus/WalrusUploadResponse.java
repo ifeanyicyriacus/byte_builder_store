@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class WalrusUploadResponse {
-    private NewlyCreated newlyCreated;
-    private AlreadySatisfied alreadySatisfied;
+    private NewlyCreated     newlyCreated;
+    private AlreadyCertified alreadyCertified;
 }

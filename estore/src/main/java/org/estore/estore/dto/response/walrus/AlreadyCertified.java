@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AlreadySatisfied {
+public class AlreadyCertified {
     private String blobId;
 }
