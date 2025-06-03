@@ -1,10 +1,10 @@
 package org.estore.estore.integration;
 
-import org.estore.estore.dto.response.WalrusUploadResponse;
+import org.estore.estore.dto.response.walrus.WalrusUploadResponse;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,9 +30,10 @@ public class WalrusCloudService implements CloudService {
         params.put("send_object_to", "0x0ec7c473cb7327d5eebd8485d45d84ba15ccb96026e234dbd17c9986f5e3f8c1");
 
         RestTemplate restTemplate = new RestTemplate();
-        var response = restTemplate.exchange(walrusUrl, PUT, requestEntity, WalrusUploadResponse.class);
-        var walrusUploadResponse = response.getBody();
-        return "";
+        ResponseEntity<WalrusUploadResponse> response = restTemplate.exchange(walrusUrl, PUT, requestEntity, WalrusUploadResponse.class);
+
+        WalrusUploadResponse walrusUploadResponse = response.getBody();
+        return walrusUploadResponse.getNewlyCreated().getBlobObject().getBlobId();
     }
 }
 
