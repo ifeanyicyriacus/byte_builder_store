@@ -37,4 +37,13 @@ public class WalrusCloudServiceTest {
             exception.printStackTrace();
         }
     }
+
+    @Test
+    void testGetFileBy() {
+        String blobId = "V4L9mlmYNFcxBOB78pHTF_WtaU8tFhJ5la-SEW8Ex-k";
+        byte[] fileContent = cloudService.getFileBy(blobId);
+        log.info("data -->: {}", fileContent);
+        assertThat(fileContent).isNotNull();
+        assertThat(fileContent).isNotEmpty();
+    }
 }

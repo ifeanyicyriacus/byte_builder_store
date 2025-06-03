@@ -1,6 +1,7 @@
 package org.estore.estore.integration;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.estore.estore.dto.response.walrus.WalrusUploadResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -18,17 +19,26 @@ import static org.springframework.http.HttpMethod.PUT;
 @RequiredArgsConstructor
 public class WalrusCloudService implements CloudService {
     @Value("${walrus.epochs}")
-    private       String       epochs;
-    @Value("${walrus.upload.address}")
-    private       String       walrusUploadAddress;
+    private String epochs;
+    @Value("${walrus.address}")
+    private String walrusUploadAddress;
     @Value("${walrus.upload.url}")
-    private       String       walrusURL;
+    private String walrusUploadURL;
+    @Value("${walrus.download.url}")
+    private String walrusDownloadURL;
+
     private final RestTemplate restTemplate;
 
     @Override
     public String upload(MultipartFile file) {
-        return extractBlobIdFrom(restTemplate.exchange(walrusURL, PUT,
+        return extractBlobIdFrom(restTemplate.exchange(walrusUploadURL, PUT,
                 buildUploadRequest(file), WalrusUploadResponse.class, createQueryParam()));
+    }
+
+    @Override
+    public byte[] getFileBy(String blobId) {
+        ResponseEntity<byte[]> response = restTemplate.getForEntity(walrusDownloadURL + "/" + blobId, byte[].class);
+        return response.getBody();
     }
 
     private HttpEntity<?> buildUploadRequest(MultipartFile file) {
