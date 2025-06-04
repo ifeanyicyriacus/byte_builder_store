@@ -20,10 +20,10 @@ class EstoreApplicationTests {
 	@Test
 	void testConnectToDatabase() {
 		try(HikariDataSource dataSource = new HikariDataSource();){
-			dataSource.setDriverClassName("org.postgresql.Driver");
-			dataSource.setJdbcUrl("jdbc:postgresql://localhost/estore_db");
-			dataSource.setUsername("postgres");
-			dataSource.setPassword("postgres");
+			dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+			dataSource.setJdbcUrl("jdbc:mysql://localhost/estore_db");
+//			dataSource.setUsername("mysql");
+//			dataSource.setPassword("mysql");
 			assertThat(dataSource).isNotNull();
 		}
 	}

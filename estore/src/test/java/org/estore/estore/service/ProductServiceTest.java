@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static util.TestUtils.buildAddProduct;
 
 @SpringBootTest
 public class ProductServiceTest {
@@ -18,7 +19,7 @@ public class ProductServiceTest {
     @Test
     public void testCanAddProduct() {
         AddProductRequest productRequest = new AddProductRequest();
-        AddProductResponse productResponse = productService.add(productRequest);
+        AddProductResponse productResponse = productService.add(buildAddProduct());
         assertThat(productResponse).isNotNull();
         assertThat(productResponse.getMedia()).isNotNull();
     }
